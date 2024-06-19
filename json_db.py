@@ -1,22 +1,20 @@
 import pandas as pd
-import os
 
-# 讀取用戶上傳的 Excel 文件
-file_path = 'mrt_test.xlsx'
+# 讀取 Excel 文件
+station_file_path = r'C:\Users\User\Desktop\MRT DATA\Repair_TRTC\repairDB\station.xlsx'
+personnel_file_path = r'C:\Users\User\Desktop\MRT DATA\Repair_TRTC\repairDB\Personnel.xlsx'  # 這裡使用你上傳的文件路徑
 
-if os.path.exists(file_path):
-    print("File exists")
-    df = pd.read_excel(file_path)
+# 讀取數據
+station_df = pd.read_excel(station_file_path)
+personnel_df = pd.read_excel(personnel_file_path)
 
-    # 轉換為 JSON 格式
-    json_data = df.to_json(orient='records', force_ascii=False)
+# 將數據框架轉換為 JSON 文件
+station_json_data = station_df.to_json(orient='records', force_ascii=False)
+personnel_json_data = personnel_df.to_json(orient='records', force_ascii=False)
 
-    # 保存 JSON 文件
-    json_file_path = 'C:/Users/User/Desktop/MRT DATA/Repair_TRTC/options.json'
-    with open(json_file_path, 'w', encoding='utf-8') as file:
-        file.write(json_data)
+# 保存 JSON 文件
+with open('stationDB.json', 'w', encoding='utf-8') as f:
+    f.write(station_json_data)
 
-    print(f"JSON File saved: {json_file_path}")
-
-else:
-    print("File does not exist")
+with open('personnelDB.json', 'w', encoding='utf-8') as f:
+    f.write(personnel_json_data)
