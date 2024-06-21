@@ -44,6 +44,12 @@ hr {
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(177, 13, 13, 0.1);
   font-size: 2rem;
+  text-align: left;
+  width: auto;
+  white-space: pre-wrap;
+  position: absolute;
+  left: 0;
+  margin-left: 246px;
 }
 
 .button-29 {
@@ -79,6 +85,8 @@ hr {
   white-space: nowrap;
   will-change: box-shadow, transform;
   font-size: 100px;
+  margin-top: 1338px; /* 增加這一行來向下移動按鈕 */
+  margin-left: 220px;
 }
 
 .button-29:focus {
@@ -129,4 +137,12 @@ input[type="date"] {
 
 option {
   font-size: 2rem;
+}
+
+#isComplete {
+  width: 20px;
+  height: 20px;
+  transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  margin: 0 10px;
 }

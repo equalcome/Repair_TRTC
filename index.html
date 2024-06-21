@@ -67,6 +67,16 @@
           onchange="updateDetails()"
         />
       </div>
+
+      <div class="form-row">
+        <label for="isComplete">已完報？</label>
+        <input
+          type="checkbox"
+          id="isComplete"
+          name="isComplete"
+          onchange="updateDetails()"
+        />
+      </div>
     </div>
 
     <hr />
@@ -131,13 +141,12 @@
       </div>
       <div class="form-row">
         <label for="departureLocation">出發地點：</label>
-        <select
+        <input
+          type="text"
           id="departureLocation"
           name="departureLocation"
-          onchange="updateDetails()"
-        >
-          <!-- 選項將由 JavaScript 動態生成 -->
-        </select>
+          oninput="updateDetails()"
+        />
       </div>
       <div class="form-row">
         <label for="personnelSelected">現場負責人：</label>
@@ -160,7 +169,11 @@
           rows="4"
           style="flex: 2"
           oninput="updateDetails()"
-        ></textarea>
+        >
+a.
+b.
+c.</textarea
+        >
       </div>
     </div>
 

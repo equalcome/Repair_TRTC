@@ -17,15 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((response) => response.json())
     .then((data) => {
       const reportSelect = document.getElementById("report");
-      const departureLocationSelect =
-        document.getElementById("departureLocation");
 
       data.forEach((item) => {
         const option = document.createElement("option");
         option.value = item["股別"];
         option.text = item["股別"];
         reportSelect.appendChild(option);
-        departureLocationSelect.appendChild(option.cloneNode(true));
       });
 
       gatherSelections();
@@ -74,6 +71,10 @@ function gatherSelections() {
     "incidentDescription"
   ).value;
 
+  // Check if the report is complete
+  let isComplete = document.getElementById("isComplete").checked;
+  let reportStatus = isComplete ? "(完)" : "";
+
   // Update impact range details
   const delay = document.getElementById("delay").value;
   const influenceInterval = document.getElementById("influenceInterval").value;
@@ -85,29 +86,27 @@ function gatherSelections() {
   // 處理情況
   const departureTime = document.getElementById("departureTime").value;
   const arrivalTime = document.getElementById("arrivalTime").value;
-  const departureLocationSelect = document.getElementById("departureLocation");
-  const departureLocation =
-    departureLocationSelect.options[departureLocationSelect.selectedIndex].text;
+  const departureLocation = document.getElementById("departureLocation").value;
 
   const personnelSelect = document.getElementById("personnelSelected");
   const selectedPersonnel = Array.from(personnelSelect.selectedOptions).map(
     (option) => option.text
   );
   const personnelText =
-    selectedPersonnel.join("及") + `共${selectedPersonnel.length}員`;
+    selectedPersonnel.join("、") + `共${selectedPersonnel.length}員`;
 
   const processDescription =
     document.getElementById("processDescription").value;
 
   // Compile title and incident report
-  const titleText = `${reportText}-第${reportNumber}報：\n`;
+  const titleText = `${reportText}-第${reportNumber}報${reportStatus}：\n`;
   let resultText = `(1)事件：${formattedDateTime} ${incidentDescription}\n`;
 
   // (2)影響範圍：
-  const impactDetails = `(2)影響範圍：\n延誤否：${delay}\n影響區間：${influenceInterval}\n簡易敘述：${simpleDescription}\n`;
+  const impactDetails = `(2)影響範圍：\n⚫延誤否：${delay}\n⚫影響區間：${influenceInterval}\n⚫簡易敘述：${simpleDescription}\n`;
 
   // (3)處理情況：
-  const situation = `(3)處理情況：\n出發時間：${departureTime}\n抵達時間：${arrivalTime}\n出發地點：${departureLocation}\n現場負責人：${personnelText}\n處理過程：${processDescription}`;
+  const situation = `(3)處理情況：\n⚫出發時間：${departureTime}\n⚫抵達時間：${arrivalTime}\n⚫出發地點：${departureLocation}\n⚫現場負責人：${personnelText}\n⚫處理過程：\n${processDescription}`;
 
   // Display the result in the result area
   document.getElementById("result").innerText =
